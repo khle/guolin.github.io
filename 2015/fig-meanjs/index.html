@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="/asset/guolin.png"/>
+        <link rel="alternate" type="application/rss+xml" title="Guo Lin" href="/atom.xml">
+        <link rel="canonical" href="http://guolinn.com/">
+
+        <title>Getting started with Fig and MEAN.JS | GuoLin&#39;s blog</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/guolin.png" alt="GuoLin's blog" /></a>
+            <h1><a href="/">Guo Lin</a></h1>
+            <p>住在北京、热爱生活、家有一女、全栈程序员、产品经理。</p>
+            <div id="follow-icons">
+	<a href="http://instagram.com/guolin"><i class="fa fa-instagram fa-2x"></i></a>
+	<a href="http://pinterest.com/guolin"><i class="fa fa-pinterest-square fa-2x"></i></a>
+	<a href="http://github.com/guolin"><i class="fa fa-github-square fa-2x"></i></a>
+	<a href="http://facebook.com/guolinnn"><i class="fa fa-facebook-square fa-2x"></i></a>
+	<a href="http://twitter.com/MrGuo"><i class="fa fa-twitter-square fa-2x"></i></a>
+	<a href="http://linkedin.com/in/mrguolin"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	<a href="/atom.xml"><i class="fa fa-rss-square fa-2x"></i></a>
+</div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  
+  February 18, 2015
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/docker/'>docker</a> 
+    
+      <a href='/tags/nodejs/'>nodejs</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">Getting started with Fig and MEAN.JS</h1>
+  <section class="post-content article-entry">
+    <p><a href="http://docker.io" target="_blank" rel="external">Docker</a> is an open-source project to easily create lightweight, portable and self-sufficient containers from any application. </p>
+<p><a href="http://www.fig.sh/index.html" target="_blank" rel="external">Fig.sh</a> is a tool to use docker for makeing a fast, isolated development environments.</p>
+<p><a href="http://meanjs.org/" target="_blank" rel="external">MEAN.JS</a> MEAN means Mongodb, Express.js, Angular.js and Node.js. MEAN is a seed to setup a MEAN project quickly.</p>
+<p><em>\</em>more infomation your can see the offical site.*</p>
+<p>This tutorial will tell you how to setup dockerizing MEAN project use less 20 mins(dependent on your network). </p>
+<h3 id="Prerequisites">Prerequisites</h3>
+<p>You need have <code>Docker</code>, <code>fig</code>, If you are useing Mac your need <code>boot2docker</code>.</p>
+<p>Ensure all the tools were installed:</p>
+<figure class="highlight bash"><pre><div class="line">$ docker version</div><div class="line">$ fig --version</div></pre></figure>
+
+<h3 id="Get_the_MEAN-JS">Get the MEAN.JS</h3>
+<p>Download the <a href="http://yeoman.io/" target="_blank" rel="external">yo</a> and install MEAN.JS with yo.</p>
+<figure class="highlight bash"><pre><div class="line">$ npm install -g yo generator-meanjs grunt</div><div class="line">$ yo meanjs</div><div class="line">$ grunt</div></pre></figure>
+
+<h3 id="Run_the_docker_with_fig">Run the docker with fig</h3>
+<p>If you use Mac, you neet run the docker host first.</p>
+<figure class="highlight bash"><pre><div class="line">$ boot2docker up</div><div class="line">$ $(boot2dockr shellinit)</div><div class="line">$ boot2docker ip</div><div class="line">// will display the ip address of docker host</div><div class="line">// may be <span class="number">192.168</span>.<span class="number">53.103</span></div></pre></figure>
+
+<p>change the DB connect URL from <code>mongodb://localhost/mean-dev</code> to <code>mongodb://db/mean-dev</code>. config file is <code>config/env/development.js</code></p>
+<p>Run <code>$ fig up</code> and open <code>http://docker-host-ip:3000</code></p>
+<p>That’s it. very simple.</p>
+<h2 id="But_if_you_realy_develop_on_this_docker_env">But if you realy develop on this docker env</h2>
+<p>You mast don’t like to build the docker image every time.  So you can mount the local development folder <code>./</code> to docker container.<br>It is very easy too. Just config the <code>fig.yml</code> under the web section</p>
+<figure class="highlight"><pre><div class="line">volumes:</div><div class="line"> -<span class="ruby"> .<span class="symbol">:/data</span></span></div></pre></figure>
+
+
+
+<p>Then when you change any thing in you local code folder, the running doceker container will change immediately.</p>
+<h2 id="But_if_you_are_useing_Mac,_it_will_be_super_slowly-">But if you are useing Mac, it will be super slowly.</h2>
+<p>because, there is performance issue when VirtualBox shell a folder from mac to boot2docker. I finded out the key is <code>node_modules</code> folder. If I don’t mount the <code>node_modules</code> folder, the preformance is ok. So my solution is mount the other folder individual. </p>
+<p>the <code>fig.yml</code> will like:</p>
+<figure class="highlight"><pre><div class="line"><span class="title">volumes</span>:</div><div class="line"> - ./app:/<span class="typedef"><span class="keyword">data</span>/app</span></div><div class="line"> - ./config:/<span class="typedef"><span class="keyword">data</span>/config</span></div><div class="line"> - ./public:/<span class="typedef"><span class="keyword">data</span>/public</span></div><div class="line"> - ./.jshintrc:/<span class="typedef"><span class="keyword">data</span>/.jshintrc</span></div><div class="line"> - ./.csslintrc:/<span class="typedef"><span class="keyword">data</span>/.csslintrc</span></div><div class="line"> - ./package.json:/<span class="typedef"><span class="keyword">data</span>/package.json</span></div><div class="line"> - ./gruntfile.js:/<span class="typedef"><span class="keyword">data</span>/gruntfile.js</span></div><div class="line"> - ./server.js:/<span class="typedef"><span class="keyword">data</span>/server.js</span></div></pre></figure>
+
+<p>That is all. :)</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Guo Lin</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2015/Getting-started-with-Fig-and-Express-js/">
+        <!--Getting started with Fig and Express.js--> next →
+    </a>
+    
+</nav>
+
+<!-- Begin Comments Code -->
+<div id="comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'guolinn'; // required: replace example with your shortname
+      var disqus_identifier = '{{id}}';
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+<!-- End Comments Code -->
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2015 Guo Lin. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
+        </footer>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','/js/ga.js','ga');
+            ga('create', 'UA-59837832-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </body>
+</html>
+
+

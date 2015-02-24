@@ -4,7 +4,7 @@
   <subtitle><![CDATA[住在北京、热爱生活、家有一女、全栈程序员、产品经理。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://guolinn.com/"/>
-  <updated>2015-02-24T09:19:03.051Z</updated>
+  <updated>2015-02-24T15:35:41.873Z</updated>
   <id>http://guolinn.com/</id>
   
   <author>
@@ -13,6 +13,57 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Getting started with Fig and MEAN.JS]]></title>
+    <link href="http://guolinn.com/2015/fig-meanjs/"/>
+    <id>http://guolinn.com/2015/fig-meanjs/</id>
+    <published>2015-02-18T08:01:31.000Z</published>
+    <updated>2015-02-24T15:34:06.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://docker.io" target="_blank" rel="external">Docker</a> is an open-source project to easily create lightweight, portable and self-sufficient containers from any application. </p>
+<p><a href="http://www.fig.sh/index.html" target="_blank" rel="external">Fig.sh</a> is a tool to use docker for makeing a fast, isolated development environments.</p>
+<p><a href="http://meanjs.org/" target="_blank" rel="external">MEAN.JS</a> MEAN means Mongodb, Express.js, Angular.js and Node.js. MEAN is a seed to setup a MEAN project quickly.</p>
+<p><em>\</em>more infomation your can see the offical site.*</p>
+<p>This tutorial will tell you how to setup dockerizing MEAN project use less 20 mins(dependent on your network). </p>
+<h3 id="Prerequisites">Prerequisites</h3>
+<p>You need have <code>Docker</code>, <code>fig</code>, If you are useing Mac your need <code>boot2docker</code>.</p>
+<p>Ensure all the tools were installed:</p>
+<figure class="highlight bash"><pre><div class="line">$ docker version</div><div class="line">$ fig --version</div></pre></figure>
+
+<h3 id="Get_the_MEAN-JS">Get the MEAN.JS</h3>
+<p>Download the <a href="http://yeoman.io/" target="_blank" rel="external">yo</a> and install MEAN.JS with yo.</p>
+<figure class="highlight bash"><pre><div class="line">$ npm install -g yo generator-meanjs grunt</div><div class="line">$ yo meanjs</div><div class="line">$ grunt</div></pre></figure>
+
+<h3 id="Run_the_docker_with_fig">Run the docker with fig</h3>
+<p>If you use Mac, you neet run the docker host first.</p>
+<figure class="highlight bash"><pre><div class="line">$ boot2docker up</div><div class="line">$ $(boot2dockr shellinit)</div><div class="line">$ boot2docker ip</div><div class="line">// will display the ip address of docker host</div><div class="line">// may be <span class="number">192.168</span>.<span class="number">53.103</span></div></pre></figure>
+
+<p>change the DB connect URL from <code>mongodb://localhost/mean-dev</code> to <code>mongodb://db/mean-dev</code>. config file is <code>config/env/development.js</code></p>
+<p>Run <code>$ fig up</code> and open <code>http://docker-host-ip:3000</code></p>
+<p>That’s it. very simple.</p>
+<h2 id="But_if_you_realy_develop_on_this_docker_env">But if you realy develop on this docker env</h2>
+<p>You mast don’t like to build the docker image every time.  So you can mount the local development folder <code>./</code> to docker container.<br>It is very easy too. Just config the <code>fig.yml</code> under the web section</p>
+<figure class="highlight"><pre><div class="line">volumes:</div><div class="line"> -<span class="ruby"> .<span class="symbol">:/data</span></span></div></pre></figure>
+
+
+
+<p>Then when you change any thing in you local code folder, the running doceker container will change immediately.</p>
+<h2 id="But_if_you_are_useing_Mac,_it_will_be_super_slowly-">But if you are useing Mac, it will be super slowly.</h2>
+<p>because, there is performance issue when VirtualBox shell a folder from mac to boot2docker. I finded out the key is <code>node_modules</code> folder. If I don’t mount the <code>node_modules</code> folder, the preformance is ok. So my solution is mount the other folder individual. </p>
+<p>the <code>fig.yml</code> will like:</p>
+<figure class="highlight"><pre><div class="line"><span class="title">volumes</span>:</div><div class="line"> - ./app:/<span class="typedef"><span class="keyword">data</span>/app</span></div><div class="line"> - ./config:/<span class="typedef"><span class="keyword">data</span>/config</span></div><div class="line"> - ./public:/<span class="typedef"><span class="keyword">data</span>/public</span></div><div class="line"> - ./.jshintrc:/<span class="typedef"><span class="keyword">data</span>/.jshintrc</span></div><div class="line"> - ./.csslintrc:/<span class="typedef"><span class="keyword">data</span>/.csslintrc</span></div><div class="line"> - ./package.json:/<span class="typedef"><span class="keyword">data</span>/package.json</span></div><div class="line"> - ./gruntfile.js:/<span class="typedef"><span class="keyword">data</span>/gruntfile.js</span></div><div class="line"> - ./server.js:/<span class="typedef"><span class="keyword">data</span>/server.js</span></div></pre></figure>
+
+<p>That is all. :)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://docker.io" target="_blank" rel="external">Docker</a> is an open-source project to easily create lightweight, portable and]]>
+    </summary>
+    
+      <category term="docker" scheme="http://guolinn.com/tags/docker/"/>
+    
+      <category term="nodejs" scheme="http://guolinn.com/tags/nodejs/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Getting started with Fig and Express.js]]></title>
@@ -224,7 +275,7 @@
     <link href="http://guolinn.com/2014/mutli-screen/"/>
     <id>http://guolinn.com/2014/mutli-screen/</id>
     <published>2014-07-21T01:05:00.000Z</published>
-    <updated>2015-02-24T06:13:58.000Z</updated>
+    <updated>2015-02-24T09:35:33.000Z</updated>
     <content type="html"><![CDATA[<h4 id="一致性特征">一致性特征</h4>
 <p>在不同的设备上呈现不同的样式，但是大体的功能类似。例如，</p>
 <ul>
@@ -244,7 +295,7 @@
 <p>指的是在两个设备的功能互补，分为两种情况：</p>
 <p>第一种 mast to have</p>
 <ul>
-<li><p><a href="https://itunes.apple.com/us/app/real-racing-2/id386568787?mt=8" target="_blank" rel="external">real race 2</a>:  iPad或airpaly作为比赛转播大屏幕，其他设备作为车手参加比赛。<img src="/content/images/2015/02/rr2partyplay.jpg" alt="">还可以airpaly的大屏幕作为第一视角比赛，iPhone作为遥控器＋路线地图，玩起来就想用XBox的手柄差不多。<em>（类似的游戏还有<a href="https://itunes.apple.com/us/app/padracer/id369603739?mt=8" target="_blank" rel="external">pad racer</a>, <a href="https://itunes.apple.com/cn/app/kuang-ye-biao-che8-ji-su-ling/id610391947?mt=8" target="_blank" rel="external">狂野飙车</a>)</em></p>
+<li><p><a href="https://itunes.apple.com/us/app/real-racing-2/id386568787?mt=8" target="_blank" rel="external">real race 2</a>:  iPad或airpaly作为比赛转播大屏幕，其他设备作为车手参加比赛。<img src="/asset/rr2partyplay.jpg" alt="">还可以airpaly的大屏幕作为第一视角比赛，iPhone作为遥控器＋路线地图，玩起来就想用XBox的手柄差不多。<em>（类似的游戏还有<a href="https://itunes.apple.com/us/app/padracer/id369603739?mt=8" target="_blank" rel="external">pad racer</a>, <a href="https://itunes.apple.com/cn/app/kuang-ye-biao-che8-ji-su-ling/id610391947?mt=8" target="_blank" rel="external">狂野飙车</a>)</em></p>
 </li>
 <li><p><a href="https://chrome.com/supersyncsports/" target="_blank" rel="external">supersyncsports</a>: 一款非常有趣儿的小游戏。用PC作为服务已用手机控制小人赛跑和游泳。强烈推荐。</p>
 </li>
@@ -272,7 +323,7 @@
     <link href="http://guolinn.com/2014/NIKE-fuelband/"/>
     <id>http://guolinn.com/2014/NIKE-fuelband/</id>
     <published>2014-06-14T00:29:28.000Z</published>
-    <updated>2015-02-24T06:32:40.000Z</updated>
+    <updated>2015-02-24T09:32:27.000Z</updated>
     <content type="html"><![CDATA[<p><img src="/asset/fuelband.png" alt="fueland"></p>
 <p>入手NIKE＋ fuelband两周有余，说一下它的多屏体验。</p>
 <p>它其实就是功能很简单的一个计步器，但当它和手机与相连就产生了很有意思的变化。</p>
