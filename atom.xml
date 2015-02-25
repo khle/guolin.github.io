@@ -4,7 +4,7 @@
   <subtitle><![CDATA[住在北京、热爱生活、家有一女、全栈程序员、产品经理。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://guolinn.com/"/>
-  <updated>2015-02-24T15:35:41.873Z</updated>
+  <updated>2015-02-25T14:10:07.662Z</updated>
   <id>http://guolinn.com/</id>
   
   <author>
@@ -178,6 +178,46 @@
   </entry>
   
   <entry>
+    <title><![CDATA[基于互联网的多屏互动的思路]]></title>
+    <link href="http://guolinn.com/2014/airplay/"/>
+    <id>http://guolinn.com/2014/airplay/</id>
+    <published>2014-09-25T13:06:42.000Z</published>
+    <updated>2015-02-25T14:09:17.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2>
+<p>目前大多数投屏的技术方案（包括airplay，DLNA，chromecast，miracast等）有一个共同的特点就是<strong>基于局域网的设备发现</strong>。这个特点明显的好处就是完全不依赖于internet，不需要连接外网就能正常工作。</p>
+<p>但随着时代的发展，1.越来越多的设备可以上网（参见物联网的定义 IoT:Internet of Thing），2.绝大多数的视频都来自网络。基于以上两点 “不依赖internet” 带来的好处并不明显。但带来的缺点去越来越突出:</p>
+<ul>
+<li>设备配对操作复杂：airplay、DLNA、chromecast需要在同一局域网内并且用专门的硬件和客户端软件才能操作成功。miracast更需要连接wifi热点。</li>
+<li>私有协议互不兼容：airplay只能用于apple生态系统，chromecast需要注册成为google的开发者，开发和调试程序都需要通过google。</li>
+<li>可扩展性差：airplay的字幕一直不能自定义，播放进度条永远挡住字幕，这些都没发由开发者自己定义。</li>
+<li>交互逻辑陈旧：例如airplay依然是扩展屏幕的概念，部分ipad app airplay到itv时，ipad的app竟然必须保持开启且常亮。难道不能同时用ipad干点儿别的吗？</li>
+<li>稳定性和兼容性差：airplay是所有方案中最稳定的，但也经常出错。</li>
+</ul>
+<h2 id="方案">方案</h2>
+<p><strong>基于互联网的投屏方案</strong></p>
+<p><img src="/asset/airplay.png" alt="基于互联网的投屏方案"></p>
+<p>这个方案的特点是：</p>
+<ol>
+<li>多了一个云端的server，不再基于设备发现。不再需要设备配对的过程，也不强制在同一个局域网内。</li>
+<li>采用PUB/SUB的模型，解除部分耦合、简单稳定且易于理解。</li>
+</ol>
+<h3 id="备注">备注</h3>
+<ol>
+<li>chromecast也是有中央服务器的，但是它依然机遇设备发现。这就导致了：1. 将chromecast插在酒店电视上，但酒店的局域网时不互通的导致chromecast没法用。2. youtube用chromecast播放必须安装一个chrome插件。……</li>
+<li>airplay和其他的方案在播放远程视频时也是传输的URL。但airplay还需要在客户端显示视频的进度条和下载速度等信息，这可能导致很多同步的错误。</li>
+<li>airply和chromecast的应用场景比这个方案的应用场景要宏大的多（mirror功能）。本方案只想解决最基础和常用的功能。（mirror功能的延迟和画质真的是惨不忍睹呀）</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="问题">问题</h2>
+<p>目前大多数投屏的技术方案（包括airplay，DLNA，chromecast，miracast等）有一个共同的特点就是<strong>基于局域网的设备发现</strong>。这个特点明显的好处就是完全不依赖于internet，不需要连]]>
+    </summary>
+    
+      <category term="multi-screen" scheme="http://guolinn.com/tags/multi-screen/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[JavaScript 数据结构 与 lodash]]></title>
     <link href="http://guolinn.com/2014/js-lodash-datastructure/"/>
     <id>http://guolinn.com/2014/js-lodash-datastructure/</id>
@@ -275,7 +315,7 @@
     <link href="http://guolinn.com/2014/mutli-screen/"/>
     <id>http://guolinn.com/2014/mutli-screen/</id>
     <published>2014-07-21T01:05:00.000Z</published>
-    <updated>2015-02-24T09:35:33.000Z</updated>
+    <updated>2015-02-25T14:08:44.000Z</updated>
     <content type="html"><![CDATA[<h4 id="一致性特征">一致性特征</h4>
 <p>在不同的设备上呈现不同的样式，但是大体的功能类似。例如，</p>
 <ul>
@@ -306,6 +346,7 @@
 <ul>
 <li>Shazam 或者 微信摇一摇也有类似的听音识别功能。可以让用户在看电视剧的时候通过声音识别当前的电视剧并且给出相关信息。例如演员表，剧情介绍、相关投票等。</li>
 </ul>
+<p>More examples you can see on <a href="https://www.pinterest.com/guolin/multi-screen-experience/" target="_blank" rel="external">https://www.pinterest.com/guolin/multi-screen-experience/</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h4 id="一致性特征">一致性特征</h4>
@@ -315,6 +356,8 @@
 <li>微信、淘宝 在iOS和android平台上的app。</li>
 <li>hu]]>
     </summary>
+    
+      <category term="multi-screen" scheme="http://guolinn.com/tags/multi-screen/"/>
     
   </entry>
   
@@ -359,7 +402,7 @@
     <link href="http://guolinn.com/2014/about-chromecast/"/>
     <id>http://guolinn.com/2014/about-chromecast/</id>
     <published>2014-06-13T16:05:35.000Z</published>
-    <updated>2015-02-24T06:14:23.000Z</updated>
+    <updated>2015-02-25T14:08:45.000Z</updated>
     <content type="html"><![CDATA[<p>前段时间搞了个chromecast，说说想法：</p>
 <h3 id="投屏不是什么新鲜的概念。">投屏不是什么新鲜的概念。</h3>
 <p>很早苹果就有了airplay，airplay发展到今天也没有太大的变化，唯一一次升级还是因为客户端硬件（iOS设备和OSx设备）实现了实时编码能力所以提供了airplay mirror功能。另外还有个DLNA，它是由几家大公司一起开发的，功能和airplay差不多，不过由于是开放协议所以相对airplay要复杂很多，目前没有稳定的硬件和软件实现。近几年又出现了一个叫mirrorcast的协议，功能相当于airplay的mirror的功能。 </p>
@@ -380,6 +423,8 @@
 <h3 id="投屏不是什么新鲜的概念。">投屏不是什么新鲜的概念。</h3>
 <p>很早苹果就有了airplay，airplay发展到今天也没有太大的变化，唯一一次升级还是因为客户端硬件（iOS设备和OSx设备）实现]]>
     </summary>
+    
+      <category term="multi-screen" scheme="http://guolinn.com/tags/multi-screen/"/>
     
   </entry>
   

@@ -9,7 +9,7 @@
         <link rel="alternate" type="application/rss+xml" title="Guo Lin" href="/atom.xml">
         <link rel="canonical" href="http://guolinn.com/">
 
-        <title>JavaScript 数据结构 与 lodash | GuoLin&#39;s blog</title>
+        <title>基于互联网的多屏互动的思路 | GuoLin&#39;s blog</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
@@ -49,94 +49,42 @@
 
 <article class="post">
   
-  August 9, 2014
+  September 25, 2014
   
     <span class="taglist">  &middot; 
     
     
-      <a href='/tags/JavaScript/'>JavaScript</a> 
+      <a href='/tags/multi-screen/'>multi-screen</a> 
     
     </span>
   
 
-  <h1 class="post-title">JavaScript 数据结构 与 lodash</h1>
+  <h1 class="post-title">基于互联网的多屏互动的思路</h1>
   <section class="post-content article-entry">
-    <p>最近想用JavaScript补习一下数据结构的基础知识，但尝试开始之后有发现了<strong>几个问题</strong>：</p>
+    <h2 id="问题">问题</h2>
+<p>目前大多数投屏的技术方案（包括airplay，DLNA，chromecast，miracast等）有一个共同的特点就是<strong>基于局域网的设备发现</strong>。这个特点明显的好处就是完全不依赖于internet，不需要连接外网就能正常工作。</p>
+<p>但随着时代的发展，1.越来越多的设备可以上网（参见物联网的定义 IoT:Internet of Thing），2.绝大多数的视频都来自网络。基于以上两点 “不依赖internet” 带来的好处并不明显。但带来的缺点去越来越突出:</p>
+<ul>
+<li>设备配对操作复杂：airplay、DLNA、chromecast需要在同一局域网内并且用专门的硬件和客户端软件才能操作成功。miracast更需要连接wifi热点。</li>
+<li>私有协议互不兼容：airplay只能用于apple生态系统，chromecast需要注册成为google的开发者，开发和调试程序都需要通过google。</li>
+<li>可扩展性差：airplay的字幕一直不能自定义，播放进度条永远挡住字幕，这些都没发由开发者自己定义。</li>
+<li>交互逻辑陈旧：例如airplay依然是扩展屏幕的概念，部分ipad app airplay到itv时，ipad的app竟然必须保持开启且常亮。难道不能同时用ipad干点儿别的吗？</li>
+<li>稳定性和兼容性差：airplay是所有方案中最稳定的，但也经常出错。</li>
+</ul>
+<h2 id="方案">方案</h2>
+<p><strong>基于互联网的投屏方案</strong></p>
+<p><img src="/asset/airplay.png" alt="基于互联网的投屏方案"></p>
+<p>这个方案的特点是：</p>
 <ol>
-<li><p>JS是一种弱类型的高级语言，只有6个基本类型（字符串、数字、布尔、null、Undifined和Object）。若要实现数组（!最基础的数据结构），列表和链表等必需基于Object的，所以就没有像C语言一样数组必须定长，必须连续的限制。所以大学时学的C语言数据结构更多的是一种编程思想而没多大实际意义。</p>
-</li>
-<li><p>JS解释器对很多基础的算法做了优化，所以在一些基础的数据结构算法上没必要太注意。而且对计算性能要求很高的计算一般也不会选择JS。</p>
-</li>
-<li><p>JS内置的Array类不仅包含了数组的操作，而且也包含了很多队列、堆栈和集合的操作。</p>
-</li>
-<li><p>开源的underscore.js和lodash也包含了很多工具方法来处理一些基础的数据结构问题。</p>
-</li>
+<li>多了一个云端的server，不再基于设备发现。不再需要设备配对的过程，也不强制在同一个局域网内。</li>
+<li>采用PUB/SUB的模型，解除部分耦合、简单稳定且易于理解。</li>
 </ol>
-<p>So, 我编写列一个<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="external">Array.prototype</a>和<a href="https://lodash.com/docs" target="_blank" rel="external">lodash</a>关于数据结构与算法的列表，按照数据结构的方式进行索引。要了解详细内容当然还是查看文档和源码更准确。</p>
-<h2 id="数组操作">数组操作</h2>
-<ul>
-<li>length: Array的长度（唯一的一个属性）</li>
-<li>indexOf lastIndexOf: 找到某个值的索引,</li>
-<li>join: 生成字符串</li>
-<li>_.includes 是否包含某个元素</li>
-<li>_.at: 返回一个包含索引的新数组。</li>
-<li>_.fill 替换元素</li>
-<li>_.sample: 随机取几个值</li>
-</ul>
-<h2 id="排序">排序</h2>
-<ul>
-<li>reverse：倒转</li>
-<li>sort: 默认按照unicode进行排序。不生成新数组</li>
-<li>_.sortBy: 生成一个新数组</li>
-<li>_.shuffle: 给数组打乱顺序</li>
-</ul>
-<h2 id="截断、连接">截断、连接</h2>
-<ul>
-<li>splice: 添加删除元素。神器</li>
-<li>concat: 连接多个数组</li>
-<li>slice _slice: 截取一部分数组</li>
-<li>_.compact: 返回所有 = =  true 的元素</li>
-<li>_.chunk: 按照给定长长度给数组分组，返回一个二维数组</li>
-<li><em>.drop </em>.dropWhile <em>.dropRight </em>.dropRightWhile:从第几个开始截取。</li>
-<li>_.remove: 删除所有符合的元素（操作原数组，返回被剪掉的数组）</li>
-<li>_.without 去掉所有值：生成新数组</li>
-<li>_.partition: 拆分两个数组，一组是符合条件的，一组是不符合条件的</li>
-</ul>
-<h2 id="迭代">迭代</h2>
-<ul>
-<li>reduce：累计执行</li>
-<li>forEach forEachRight</li>
-<li>every: 全部 == true</li>
-<li>some: 至少有一个 == true</li>
-<li>filter：new  _filter _reject</li>
-<li>map：new</li>
-</ul>
-<h2 id="列表：">列表：</h2>
-<ul>
-<li>_initial: 所有元素除了最后一个</li>
-<li>_rest: 所有的元素除了第一个</li>
-<li>_sortedIndex：二分法查找插入的位置 _sortedLastIndex</li>
-<li>_zip _unzip _zipObject 矩阵</li>
-<li>_groupBy: 按某种条件进行分组</li>
-<li>_countBy: 符合某种条件的个数</li>
-<li>_max _min ： 返回最大值最小值</li>
-</ul>
-<h2 id="集合：">集合：</h2>
-<ul>
-<li>_difference: 返回多个集合的差别</li>
-<li>_intersection: 合集</li>
-<li>_union: 并集</li>
-<li>_uniq: 但个集合去重</li>
-</ul>
-<h2 id="队列&amp;堆栈">队列&amp;堆栈</h2>
-<ul>
-<li>push: 从最后插入一个元素</li>
-<li>pop：返回最后一个元素，并删除</li>
-<li>shift：返回第一个元素，并删除</li>
-<li>_first _last: 返回第一个或最后一个的值，不删除</li>
-<li>_pull: 取出所有的值 _pullAt 取出指定位置的值</li>
-<li>_take: 从头开始取 n _takeRight: 从尾取 _takeWhile _takeRightWhile</li>
-</ul>
+<h3 id="备注">备注</h3>
+<ol>
+<li>chromecast也是有中央服务器的，但是它依然机遇设备发现。这就导致了：1. 将chromecast插在酒店电视上，但酒店的局域网时不互通的导致chromecast没法用。2. youtube用chromecast播放必须安装一个chrome插件。……</li>
+<li>airplay和其他的方案在播放远程视频时也是传输的URL。但airplay还需要在客户端显示视频的进度条和下载速度等信息，这可能导致很多同步的错误。</li>
+<li>airply和chromecast的应用场景比这个方案的应用场景要宏大的多（mirror功能）。本方案只想解决最基础和常用的功能。（mirror功能的延迟和画质真的是惨不忍睹呀）</li>
+</ol>
 
   </section>
   <footer class="post-footer">
@@ -151,14 +99,14 @@
 
 <nav class="pagination" role="pagination">
     
-    <a class="newer-posts" href="/2014/airplay/">
-        ← prev <!--基于互联网的多屏互动的思路-->
+    <a class="newer-posts" href="/2015/docker-shadowsocks/">
+        ← prev <!--Docker搭建Shadowsocks-->
     </a>
     
     <span class="page-number">•</span>
     
-    <a class="older-posts" href="/2014/mutli-screen/">
-        <!--多屏应用的设计特征与实例--> next →
+    <a class="older-posts" href="/2014/js-lodash-datastructure/">
+        <!--JavaScript 数据结构 与 lodash--> next →
     </a>
     
 </nav>
