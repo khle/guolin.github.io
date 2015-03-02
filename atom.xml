@@ -4,7 +4,7 @@
   <subtitle><![CDATA[住在北京、热爱生活、家有一女、全栈程序员、产品经理。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://guolinn.com/"/>
-  <updated>2015-02-28T14:06:27.048Z</updated>
+  <updated>2015-03-02T06:16:14.124Z</updated>
   <id>http://guolinn.com/</id>
   
   <author>
@@ -13,6 +13,25 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[TV Video player UI sketch]]></title>
+    <link href="http://guolinn.com/2015/tv-video-player-sketch/"/>
+    <id>http://guolinn.com/2015/tv-video-player-sketch/</id>
+    <published>2015-03-02T01:05:00.000Z</published>
+    <updated>2015-03-02T06:15:49.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/asset/tvplayer.png" alt="tvplayer"></p>
+<p><a href="/asset/files/tv-player-sketch.sketch">free donwload</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/asset/tvplayer.png" alt="tvplayer"></p>
+<p><a href="/asset/files/tv-player-sketch.sketch">free donwload</a></p>
+]]>
+    </summary>
+    
+      <category term="sketch" scheme="http://guolinn.com/tags/sketch/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Getting started with Fig and MEAN.JS]]></title>
