@@ -4,7 +4,7 @@
   <subtitle><![CDATA[住在北京、热爱生活、家有一女、全栈程序员、产品经理。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://guolinn.com/"/>
-  <updated>2015-03-02T06:16:14.124Z</updated>
+  <updated>2015-03-04T00:57:36.039Z</updated>
   <id>http://guolinn.com/</id>
   
   <author>
@@ -444,6 +444,23 @@
     </summary>
     
       <category term="multi-screen" scheme="http://guolinn.com/tags/multi-screen/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[FireTV-UI-Sketch]]></title>
+    <link href="http://guolinn.com/2014/firetv-ui-sketch/"/>
+    <id>http://guolinn.com/2014/firetv-ui-sketch/</id>
+    <published>2014-06-04T00:53:28.000Z</published>
+    <updated>2015-03-04T00:55:03.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/asset/firetv-ui-sketch.png" alt="tvplayer"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/asset/firetv-ui-sketch.png" alt="tvplayer"></p>
+]]>
+    </summary>
+    
+      <category term="sketch" scheme="http://guolinn.com/tags/sketch/"/>
     
   </entry>
   
