@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[GuoLin's blog]]></title>
-  <subtitle><![CDATA[住在北京、热爱生活、家有一女、全栈程序员、产品经理。]]></subtitle>
+  <subtitle><![CDATA[Developer ⇄ Production Manager. Live in Beijing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://guolinn.com/"/>
-  <updated>2015-03-04T00:57:36.039Z</updated>
+  <updated>2015-03-04T02:34:55.144Z</updated>
   <id>http://guolinn.com/</id>
   
   <author>
